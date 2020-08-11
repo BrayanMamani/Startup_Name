@@ -13,14 +13,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RandomWordsState extends State<RandomWords> {
+class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+  final _saved = <WordPair>{};
+  final _biggerFont = TextStyle(fontSize: 18.0);
 
   Widget _buildSuggestions() {
     return ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
+        padding: EdgeInsets.all(16.0),
+        itemBuilder: /*1*/ (context, i) {
           if (i.isOdd) return Divider();
 
           final index = i ~/ 2;
@@ -32,11 +33,25 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildRow(WordPair pair) {
+    final alreadySaved = _saved.contains(pair);
     return ListTile(
       title: Text(
         pair.asPascalCase,
         style: _biggerFont,
       ),
+      trailing: Icon(
+        alreadySaved ? Icons.favorite : Icons.favorite_border,
+        color: alreadySaved ? Colors.red : null,
+      ),
+      onTap: () {
+        setState(() {
+          if (alreadySaved) {
+            _saved.remove(pair);
+          } else {
+            _saved.add(pair);
+          }
+        });
+      },
     );
   }
 
@@ -53,5 +68,5 @@ class RandomWordsState extends State<RandomWords> {
 
 class RandomWords extends StatefulWidget {
   @override
-  RandomWordsState createState() => new RandomWordsState();
+  State<RandomWords> createState() => _RandomWordsState();
 }
