@@ -22,9 +22,9 @@ class _RandomWordsState extends State<RandomWords> {
     return ListView.builder(
         padding: EdgeInsets.all(16.0),
         itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return Divider();
+          if (i.isOdd) return Divider(); /*2*/
 
-          final index = i ~/ 2;
+          final index = i ~/ 2; /*3*/
           if (index >= _suggestions.length) {
             _suggestions.addAll(generateWordPairs().take(10)); /*4*/
           }
