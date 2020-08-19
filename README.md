@@ -6,6 +6,8 @@ Flutter is Google's UI toolkit for building beautiful, natively compiled applica
 
 ## About Startup Name
 
+This repository has a name generator. It will be an application that will give you suggestions of names for your startup.
+
 <img src="startup_name.gif" width="300">
 
 ## What you will need
